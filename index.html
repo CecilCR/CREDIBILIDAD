@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test de Perfiles de Credibilidad</title>
+<style>
+  :root{
+    --color-header:#1E3A5F;
+    --color-integridad:#2563eb;
+    --color-intencion:#16a34a;
+    --color-capacidades:#d97706;
+    --color-resultados:#7c3aed;
+    --gris-texto:#374151;
+    --gris-claro:#6b7280;
+    --gris-fondo:#f3f4f6;
+    --borde:#e5e7eb;
+    --radius-lg:12px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:"Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background:var(--gris-fondo);
+    color:var(--gris-texto);
+  }
+  header.app-header{
+    background:var(--color-header);
+    color:#fff;
+    padding:20px 24px;
+  }
+  header.app-header h1{
+    margin:0;
+    font-size:1.3rem;
+  }
+  header.app-header p{
+    margin:4px 0 0;
+    font-size:0.85rem;
+    opacity:0.85;
+  }
+  main{
+    max-width:760px;
+    margin:0 auto;
+    padding:24px 16px 60px;
+  }
+  .card{
+    background:#fff;
+    border:1px solid var(--borde);
+    border-radius:var(--radius-lg);
+    padding:28px;
+    margin-bottom:20px;
+  }
+  .card h2{
+    margin-top:0;
+    color:var(--color-header);
+  }
+  .dimensiones-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+    margin:20px 0;
+  }
+  .dimension-chip{
+    border-radius:10px;
+    padding:14px;
+    border:1px solid var(--borde);
+    border-left:6px solid transparent;
+  }
+  .dimension-chip strong{display:block;margin-bottom:4px;}
+  .dimension-chip.integridad{border-left-color:var(--color-integridad);}
+  .dimension-chip.intencion{border-left-color:var(--color-intencion);}
+  .dimension-chip.capacidades{border-left-color:var(--color-capacidades);}
+  .dimension-chip.resultados{border-left-color:var(--color-resultados);}
+  .btn-primary{
+    background:var(--color-header);
+    color:#fff;
+    border:none;
+    padding:12px 26px;
+    border-radius:8px;
+    font-size:1rem;
+    cursor:pointer;
+  }
+  .btn-primary:disabled{
+    background:#9ca3af;
+    cursor:not-allowed;
+  }
+  .btn-secondary{
+    background:#fff;
+    color:var(--color-header);
+    border:1px solid var(--color-header);
+    padding:12px 26px;
+    border-radius:8px;
+    font-size:1rem;
+    cursor:pointer;
+  }
+  .acciones{
+    display:flex;
+    justify-content:space-between;
+    margin-top:24px;
+  }
+  .acciones-derecha{margin-left:auto;}
+  .progreso-wrap{
+    margin-bottom:18px;
+  }
+  .progreso-texto{
+    font-size:0.85rem;
+    color:var(--gris-claro);
+    margin-bottom:6px;
+    display:flex;
+    justify-content:space-between;
+  }
+  .progreso-barra{
+    height:8px;
+    background:var(--borde);
+    border-radius:4px;
+    overflow:hidden;
+  }
+  .progreso-barra-interior{
+    height:100%;
+    background:var(--color-header);
+    transition:width 0.25s ease;
+  }
+  .etiqueta-dimension{
+    display:inline-block;
+    font-size:0.75rem;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:0.03em;
+    padding:3px 10px;
+    border-radius:999px;
+    color:#fff;
+    margin-bottom:10px;
+  }
+  .polos{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+    margin:18px 0;
+  }
+  .polo{
+    border:1px solid var(--borde);
+    border-radius:10px;
+    padding:14px;
+    font-size:0.92rem;
+    position:relative;
+  }
+  .polo .num{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:22px;
+    height:22px;
+    border-radius:50%;
+    background:var(--gris-fondo);
+    font-size:0.8rem;
+    font-weight:700;
+    margin-bottom:8px;
+  }
+  .escala{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin:22px 0 6px;
+    gap:6px;
+  }
+  .escala label{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:6px;
+    font-size:0.8rem;
+    color:var(--gris-claro);
+    cursor:pointer;
+  }
+  .escala input[type="radio"]{
+    width:22px;
+    height:22px;
+    cursor:pointer;
+  }
+  .escala-leyenda{
+    display:flex;
+    justify-content:space-between;
+    font-size:0.78rem;
+    color:var(--gris-claro);
+    margin-bottom:4px;
+  }
+  .resultado-dimension{
+    margin-bottom:22px;
+  }
+  .resultado-titulo{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    margin-bottom:6px;
+  }
+  .resultado-titulo strong{font-size:1rem;}
+  .resultado-titulo span{font-size:0.85rem;color:var(--gris-claro);}
+  .barra-resultado{
+    height:12px;
+    background:var(--gris-fondo);
+    border-radius:6px;
+    overflow:hidden;
+    margin-bottom:8px;
+  }
+  .barra-resultado-interior{
+    height:100%;
+    border-radius:6px;
+    transition:width 0.4s ease;
+  }
+  .resultado-texto{
+    font-size:0.92rem;
+    color:var(--gris-texto);
+    line-height:1.5;
+  }
+  .aviso{
+    background:#fef3c7;
+    border:1px solid #fde68a;
+    color:#92400e;
+    padding:14px 16px;
+    border-radius:10px;
+    font-size:0.9rem;
+  }
+  .aviso-error{
+    background:#fee2e2;
+    border:1px solid #fecaca;
+    color:#991b1b;
+  }
+  .estado-carga{
+    text-align:center;
+    padding:60px 20px;
+    color:var(--gris-claro);
+  }
+  .nota-final{
+    font-size:0.85rem;
+    color:var(--gris-claro);
+    margin-top:26px;
+    border-top:1px solid var(--borde);
+    padding-top:16px;
+  }
+  @media (max-width:640px){
+    .dimensiones-grid{grid-template-columns:1fr;}
+    .polos{grid-template-columns:1fr;}
+    .card{padding:20px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="app-header">
+  <h1>Test de Perfiles de Credibilidad</h1>
+  <p>Curso: Gestión de las Relaciones en las Organizaciones</p>
+</header>
+
+<main id="app">
+  <div class="estado-carga">Cargando simulador…</div>
+</main>
+
+<!-- jsPDF: usado solo para exportar el perfil de resultados a PDF en el navegador (sin backend) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
