@@ -51,7 +51,7 @@ const DIMENSIONES = {
         "Tu conducta cotidiana muestra una fuerte coherencia entre lo que piensas, dices y haces, y una defensa clara de tus valores. Esta base sólida suele ser la que más rápido genera confianza en los demás.",
     },
   },
-  Intención: {
+  "Orientación hacia los demás": {
     clave: "intencion",
     color: "var(--color-intencion)",
     colorHex: "#16a34a",
@@ -95,7 +95,7 @@ const DIMENSIONES = {
   },
 };
 
-const ORDEN_DIMENSIONES = ["Integridad", "Intención", "Capacidades", "Resultados"];
+const ORDEN_DIMENSIONES = ["Integridad", "Orientación hacia los demás", "Capacidades", "Resultados"];
 
 // ─────────────────────────────────────────────────────────
 // 3. Estado de la aplicación
